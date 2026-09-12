@@ -28,6 +28,20 @@ describe("expedition fixtures", () => {
     expect(getExpeditionBySlug("not-a-route")).toBeUndefined();
   });
 
+  it("provides complete detail content for a valid expedition route", () => {
+    const expedition = getExpeditionBySlug("arctic-circle-field-notes");
+
+    expect(expedition?.itinerary).toHaveLength(6);
+    expect(expedition?.itinerary[0]).toMatchObject({ day: 1 });
+    expect(expedition?.inclusions).toHaveLength(3);
+    expect(expedition?.preparation).toHaveLength(3);
+    expect(expedition?.readiness.capacityNote).toContain("6 travellers");
+  });
+
+  it("keeps unknown slugs recoverable by returning no expedition", () => {
+    expect(getExpeditionBySlug("midnight-sun-archive")).toBeUndefined();
+  });
+
   it("filters by supported URL query values", () => {
     const filters = parseDiscoveryFilters({ region: "Norway", duration: "4" });
 
