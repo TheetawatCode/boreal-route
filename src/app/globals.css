@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+:root {
+  --background: #07111f;
+  --foreground: #f6f7f4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.aurora-haze {
+  background:
+    radial-gradient(circle at 22% 34%, rgb(120 215 192 / 0.45), transparent 18%),
+    radial-gradient(circle at 56% 48%, rgb(141 186 231 / 0.34), transparent 31%),
+    radial-gradient(circle at 74% 68%, rgb(231 184 93 / 0.16), transparent 16%);
+  filter: blur(18px);
+  transform: rotate(-20deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
