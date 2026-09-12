@@ -16,6 +16,16 @@ export type Expedition = {
   highlights: readonly string[];
 };
 
+export type DiscoveryQuery = {
+  region?: string | readonly string[];
+  duration?: string | readonly string[];
+};
+
+export type DiscoveryFilters = {
+  region: string | null;
+  durationNights: number | null;
+};
+
 export const expeditions: readonly Expedition[] = [
   {
     slug: "lofoten-night-crossing",
@@ -63,4 +73,41 @@ export const expeditions: readonly Expedition[] = [
 
 export function getExpeditionBySlug(slug: string): Expedition | undefined {
   return expeditions.find((expedition) => expedition.slug === slug);
+}
+
+export const discoveryRegions = ["Iceland", "Norway"] as const;
+
+export const discoveryDurations = [4, 5, 6] as const;
+
+function firstQueryValue(value: string | readonly string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export function parseDiscoveryFilters(query: DiscoveryQuery): DiscoveryFilters {
+  const region = firstQueryValue(query.region);
+  const duration = Number(firstQueryValue(query.duration));
+
+  return {
+    region: discoveryRegions.includes(region as (typeof discoveryRegions)[number])
+      ? region
+      : null,
+    durationNights: discoveryDurations.includes(
+      duration as (typeof discoveryDurations)[number],
+    )
+      ? duration
+      : null,
+  };
+}
+
+export function filterExpeditions(
+  source: readonly Expedition[],
+  filters: DiscoveryFilters,
+): Expedition[] {
+  return source.filter((expedition) => {
+    const matchesRegion = !filters.region || expedition.country === filters.region;
+    const matchesDuration =
+      !filters.durationNights || expedition.durationNights === filters.durationNights;
+
+    return matchesRegion && matchesDuration;
+  });
 }

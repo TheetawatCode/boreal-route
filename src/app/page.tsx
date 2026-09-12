@@ -1,6 +1,7 @@
 import { ExpeditionCard } from "@/components/expedition-card";
 import { SiteHeader } from "@/components/site-header";
 import { expeditions } from "@/data/expeditions";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,12 +22,12 @@ export default function Home() {
                 Small-group winter journeys designed around the places, people,
                 and changing conditions that make a rare night possible.
               </p>
-              <a
-                href="#expeditions"
+              <Link
+                href="/expeditions"
                 className="relative mt-10 inline-flex items-center gap-3 border border-[#78d7c0] px-5 py-3 text-sm font-semibold text-[#f6f7f4] outline-offset-4 transition-colors hover:bg-[#78d7c0] hover:text-[#07111f] focus-visible:outline-2 focus-visible:outline-[#f6f7f4]"
               >
                 Explore expeditions <span aria-hidden="true">↓</span>
-              </a>
+              </Link>
             </div>
 
             <aside className="grid gap-5 border-l border-white/15 pl-5 text-sm text-[#c7d0d8] sm:grid-cols-3 sm:border-l-0 sm:border-t sm:pt-5 sm:pl-0 lg:col-span-4 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pb-1 lg:pl-8 lg:pt-0">

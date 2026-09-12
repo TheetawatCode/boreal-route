@@ -15,5 +15,8 @@ describe("ExpeditionCard", () => {
     expect(screen.getByText("4 nights")).toBeInTheDocument();
     expect(screen.getByText("Moderate pace")).toBeInTheDocument();
     expect(screen.getByText("January — March")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "View Lofoten Night Crossing" }),
+    ).toHaveAttribute("href", "/expeditions/lofoten-night-crossing");
   });
 });

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const navigationItems = [
-  { href: "#expeditions", label: "Expeditions" },
-  { href: "#approach", label: "Our approach" },
+  { href: "/expeditions", label: "Expeditions" },
+  { href: "/#approach", label: "Our approach" },
 ] as const;
 
 export function SiteHeader() {
@@ -19,12 +19,12 @@ export function SiteHeader() {
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium uppercase tracking-[0.16em] text-[#c7d0d8] sm:gap-x-8">
             {navigationItems.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
                   className="outline-offset-4 transition-colors hover:text-[#f6f7f4] focus-visible:outline-2 focus-visible:outline-[#78d7c0]"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
