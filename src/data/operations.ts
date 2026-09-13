@@ -44,6 +44,44 @@ export function getOperationalDepartures(): DepartureContext[] {
   });
 }
 
+export function getOperationsDepartureContext(id: string) {
+  return getOperationalDepartures().find(({ departure }) => departure.id === id);
+}
+
+export function getDepartureAttentionGuidance(context: DepartureContext) {
+  const { allocation, readiness } = context.departure;
+  const guidance: string[] = [];
+
+  if (readiness === "Weather watch") {
+    guidance.push("Hold the final route decision until the next local weather review, then release the guide and vehicle hold.");
+  }
+
+  if (readiness === "Full") {
+    guidance.push("Capacity is fully allocated in this demo. Keep the departure closed and use this record for coordination reference only.");
+  }
+
+  if (
+    allocation.status === "Needs attention" ||
+    !allocation.guideSummary.trim() ||
+    !allocation.vehicleSummary.trim()
+  ) {
+    guidance.push("Confirm a complete guide and vehicle allocation before treating the departure as operationally aligned.");
+  }
+
+  return guidance;
+}
+
+export function getOperationsBackHref(query: OperationsQuery) {
+  const filters = parseOperationsFilters(query);
+  const params = new URLSearchParams();
+
+  if (filters.readiness) params.set("readiness", filters.readiness);
+  if (filters.weatherDecision) params.set("weather", filters.weatherDecision);
+
+  const search = params.toString();
+  return search ? `/operations?${search}` : "/operations";
+}
+
 export function filterOperationalDepartures(
   source: readonly DepartureContext[],
   filters: OperationsFilters,

@@ -4,6 +4,8 @@ import {
   filterOperationalDepartures,
   getOperationalDepartures,
   getOperationsMetrics,
+  getDepartureAttentionGuidance,
+  getOperationsDepartureContext,
   parseOperationsFilters,
 } from "./operations";
 
@@ -35,5 +37,19 @@ describe("operations data", () => {
       parseOperationsFilters({ readiness: "Ready", weather: "Monitoring" }),
     );
     expect(empty).toEqual([]);
+  });
+
+  it("looks up known departures and derives attention guidance from weather, capacity, and allocation state", () => {
+    expect(getOperationsDepartureContext("lofoten-2026-02-12")?.expedition.title).toBe("Lofoten Night Crossing");
+    expect(getOperationsDepartureContext("unknown-departure")).toBeUndefined();
+
+    const weatherWatch = getOperationsDepartureContext("vatnajokull-2026-02-19");
+    const full = getOperationsDepartureContext("lofoten-2026-03-05");
+
+    if (!weatherWatch || !full) throw new Error("Expected fixture departures.");
+
+    expect(getDepartureAttentionGuidance(weatherWatch)).toHaveLength(2);
+    expect(getDepartureAttentionGuidance(weatherWatch).join(" ")).toContain("weather review");
+    expect(getDepartureAttentionGuidance(full).join(" ")).toContain("Capacity is fully allocated");
   });
 });

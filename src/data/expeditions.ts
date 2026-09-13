@@ -26,6 +26,19 @@ export type DepartureAllocation = {
   status: AllocationStatus;
 };
 
+export type ReadinessCheckpoint = {
+  label: string;
+  detail: string;
+};
+
+export type DepartureCoordination = {
+  travellerManifestSummary: string;
+  weatherRationale: string;
+  guides: readonly string[];
+  readinessTimeline: readonly ReadinessCheckpoint[];
+  departureDayChecklist: readonly string[];
+};
+
 export type Departure = {
   id: string;
   expeditionSlug: string;
@@ -36,6 +49,7 @@ export type Departure = {
   readinessDetail: string;
   weatherDecision: WeatherDecision;
   allocation: DepartureAllocation;
+  coordination: DepartureCoordination;
   price: {
     accommodationAndGuiding: number;
     routeLogistics: number;
@@ -284,6 +298,17 @@ export const departures: readonly Departure[] = [
       vehicleSummary: "2 winter vans confirmed",
       status: "Aligned",
     },
+    coordination: {
+      travellerManifestSummary: "5 travellers confirmed · 3 spaces still open · no traveller details shown in this demo.",
+      weatherRationale: "The coastal forecast has a stable clear interval after 21:00, with sheltered harbour alternatives held for wind shifts.",
+      guides: ["S. Nilsen · lead guide", "M. Berg · route support"],
+      readinessTimeline: [
+        { label: "Route plan", detail: "Sheltered coastal alternatives confirmed." },
+        { label: "Weather decision", detail: "Cleared for the current fixture window." },
+        { label: "Final briefing", detail: "Guide team to reconfirm at 16:00 on departure day." },
+      ],
+      departureDayChecklist: ["Confirm harbour pickup window", "Review wind threshold with guide pair", "Stage thermal drinks and spare layers"],
+    },
     price: {
       accommodationAndGuiding: 2140,
       routeLogistics: 350,
@@ -303,6 +328,16 @@ export const departures: readonly Departure[] = [
       guideSummary: "Guide roster closed",
       vehicleSummary: "Vehicle allocation closed",
       status: "Not required",
+    },
+    coordination: {
+      travellerManifestSummary: "8 spaces allocated · departure is full · no traveller details shown in this demo.",
+      weatherRationale: "The public fixture window is closed because capacity is full; no further operating decision is required here.",
+      guides: ["Roster closed for this full departure"],
+      readinessTimeline: [
+        { label: "Capacity", detail: "All eight spaces allocated." },
+        { label: "Operations", detail: "Roster and vehicle planning closed in this demo." },
+      ],
+      departureDayChecklist: ["Keep closed departure record for reference", "Do not reopen capacity in this demo"],
     },
     price: {
       accommodationAndGuiding: 2140,
@@ -324,6 +359,17 @@ export const departures: readonly Departure[] = [
       vehicleSummary: "4×4 and driver confirmed",
       status: "Aligned",
     },
+    coordination: {
+      travellerManifestSummary: "6 travellers confirmed · 4 spaces still open · no traveller details shown in this demo.",
+      weatherRationale: "Forecast confidence supports the lagoon route, with an inland alternative reserved if coastal wind increases.",
+      guides: ["E. Jónsdóttir · lead guide", "Local driver · confirmed"],
+      readinessTimeline: [
+        { label: "Lodge", detail: "Countryside rooms confirmed." },
+        { label: "Weather decision", detail: "Cleared with inland alternative held." },
+        { label: "Vehicle", detail: "4×4 and driver allocated." },
+      ],
+      departureDayChecklist: ["Confirm lodge arrival list", "Check coastal road advisory", "Share final route window with driver"],
+    },
     price: {
       accommodationAndGuiding: 2380,
       routeLogistics: 410,
@@ -343,6 +389,17 @@ export const departures: readonly Departure[] = [
       guideSummary: "Guide held pending weather decision",
       vehicleSummary: "4×4 option on weather hold",
       status: "Needs attention",
+    },
+    coordination: {
+      travellerManifestSummary: "8 travellers confirmed · 2 spaces still open · no traveller details shown in this demo.",
+      weatherRationale: "A coastal wind system may narrow safe glacier-lagoon access. The final route decision remains pending the local afternoon forecast.",
+      guides: ["E. Jónsdóttir · held pending decision", "Local driver · on weather hold"],
+      readinessTimeline: [
+        { label: "Lodge", detail: "Rooms and route alternatives held." },
+        { label: "Weather decision", detail: "Monitoring local wind and visibility updates." },
+        { label: "Allocation", detail: "Guide and 4×4 remain on hold pending decision." },
+      ],
+      departureDayChecklist: ["Review local wind forecast at 14:00", "Confirm lagoon or inland route", "Release guide and vehicle hold after decision"],
     },
     price: {
       accommodationAndGuiding: 2380,
@@ -364,6 +421,17 @@ export const departures: readonly Departure[] = [
       vehicleSummary: "Expedition minibus confirmed",
       status: "Aligned",
     },
+    coordination: {
+      travellerManifestSummary: "4 travellers confirmed · 2 spaces still open · no traveller details shown in this demo.",
+      weatherRationale: "Forest and fjord route options are both within the current safe operating window, allowing a final field choice after briefing.",
+      guides: ["A. Hansen · field lead", "R. Sámi · route support"],
+      readinessTimeline: [
+        { label: "Lodge", detail: "Remote lodge and field equipment ready." },
+        { label: "Weather decision", detail: "Cleared with forest fallback maintained." },
+        { label: "Vehicle", detail: "Expedition minibus assigned." },
+      ],
+      departureDayChecklist: ["Check snow travel equipment", "Review fjord wind reading", "Load warm drinks and emergency kit"],
+    },
     price: {
       accommodationAndGuiding: 2840,
       routeLogistics: 520,
@@ -383,6 +451,16 @@ export const departures: readonly Departure[] = [
       guideSummary: "Guide roster closed",
       vehicleSummary: "Vehicle allocation closed",
       status: "Not required",
+    },
+    coordination: {
+      travellerManifestSummary: "6 spaces allocated · departure is full · no traveller details shown in this demo.",
+      weatherRationale: "The public fixture window is closed because capacity is full; this coordination record remains read-only.",
+      guides: ["Roster closed for this full departure"],
+      readinessTimeline: [
+        { label: "Capacity", detail: "All six spaces allocated." },
+        { label: "Operations", detail: "Roster and vehicle planning closed in this demo." },
+      ],
+      departureDayChecklist: ["Keep closed departure record for reference", "Do not reopen capacity in this demo"],
     },
     price: {
       accommodationAndGuiding: 2840,
