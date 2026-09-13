@@ -3,7 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { SiteHeader } from "@/components/site-header";
-import { expeditions, getExpeditionBySlug } from "@/data/expeditions";
+import {
+  expeditions,
+  getDeparturesForExpedition,
+  getExpeditionBySlug,
+  isDepartureSelectable,
+} from "@/data/expeditions";
 
 type ExpeditionDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -41,6 +46,9 @@ export default async function ExpeditionDetailPage({
   if (!expedition) {
     notFound();
   }
+
+  const departures = getDeparturesForExpedition(expedition.slug);
+  const selectableDepartureCount = departures.filter(isDepartureSelectable).length;
 
   return (
     <div className="min-h-screen bg-[#f6f7f4] text-[#07111f]">
@@ -131,6 +139,53 @@ export default async function ExpeditionDetailPage({
                 </li>
               ))}
             </ol>
+
+            <section id="departures" aria-labelledby="departures-heading" className="mt-14 scroll-mt-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#416f88]">
+                Departure windows
+              </p>
+              <h2 id="departures-heading" className="mt-4 text-4xl font-semibold tracking-[-0.05em] sm:text-5xl">
+                Choose a departure to review.
+              </h2>
+              <p className="mt-5 max-w-2xl leading-7 text-[#425467]">
+                Only departures marked ready with remaining spaces can move to
+                the simulated booking review. No place is held at this stage.
+              </p>
+              <ul className="mt-9 space-y-4">
+                {departures.map((departure) => {
+                  const selectable = isDepartureSelectable(departure);
+
+                  return (
+                    <li key={departure.id} className="border border-[#bdcbd2] bg-white p-5 sm:p-6">
+                      <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <h3 className="text-xl font-semibold tracking-[-0.03em]">{departure.dateRange}</h3>
+                          <p role="status" className="mt-3 flex gap-3 text-sm leading-6 text-[#425467]">
+                            <span aria-hidden="true" className="text-[#416f88]">●</span>
+                            {departure.readiness} · {departure.remainingSpaces} of {departure.capacity} spaces remaining
+                          </p>
+                          <p className="mt-3 max-w-xl text-sm leading-6 text-[#425467]">
+                            {departure.readinessDetail}
+                          </p>
+                        </div>
+                        {selectable ? (
+                          <Link
+                            href={`/book/${departure.id}`}
+                            className="shrink-0 border border-[#07111f] px-4 py-2.5 text-sm font-semibold text-[#07111f] outline-offset-4 transition-colors hover:bg-[#07111f] hover:text-[#f6f7f4] focus-visible:outline-2 focus-visible:outline-[#416f88]"
+                          >
+                            Review this departure
+                          </Link>
+                        ) : (
+                          <p className="shrink-0 border border-[#bdcbd2] px-4 py-2.5 text-sm font-semibold text-[#667985]">
+                            Not available for review
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
           </section>
 
           <aside className="space-y-10 lg:col-span-4 lg:pl-8">
@@ -148,17 +203,12 @@ export default async function ExpeditionDetailPage({
               <p className="mt-5 border-t border-[#dce2e5] pt-5 text-sm font-medium text-[#28465b]">
                 {expedition.readiness.capacityNote}
               </p>
-              <button
-                type="button"
-                disabled
-                aria-describedby="booking-deferred"
-                className="mt-7 w-full cursor-not-allowed bg-[#dce2e5] px-5 py-3 text-sm font-semibold text-[#667985]"
+              <a
+                href="#departures"
+                className="mt-7 inline-flex text-sm font-semibold text-[#28465b] underline decoration-[#8dbae7] underline-offset-4 outline-offset-4 hover:text-[#07111f] focus-visible:outline-2 focus-visible:outline-[#416f88]"
               >
-                Booking opens later
-              </button>
-              <p id="booking-deferred" className="mt-3 text-sm leading-6 text-[#425467]">
-                Departure selection and simulated booking arrive in a later milestone.
-              </p>
+                {selectableDepartureCount} departure{selectableDepartureCount === 1 ? "" : "s"} ready to review
+              </a>
             </section>
 
             <section aria-labelledby="included-heading">

@@ -1,9 +1,15 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  departures,
   expeditions,
   filterExpeditions,
+  getBookableDepartureContext,
+  getDepartureContext,
+  getPricePerTraveller,
   getExpeditionBySlug,
+  getSafePartySize,
+  isDepartureSelectable,
   parseDiscoveryFilters,
 } from "./expeditions";
 
@@ -64,5 +70,31 @@ describe("expedition fixtures", () => {
     const filters = parseDiscoveryFilters({ region: "Iceland", duration: "4" });
 
     expect(filterExpeditions(expeditions, filters)).toEqual([]);
+  });
+
+  it("derives selectable departures from readiness and remaining capacity", () => {
+    const selectable = departures.filter(isDepartureSelectable);
+
+    expect(selectable.map((departure) => departure.id)).toEqual([
+      "lofoten-2026-02-12",
+      "vatnajokull-2026-01-22",
+      "finnmark-2026-03-14",
+    ]);
+    expect(getPricePerTraveller(selectable[0])).toBe(2490);
+  });
+
+  it("recovers safely from unknown or unavailable departure IDs", () => {
+    expect(getBookableDepartureContext("lofoten-2026-03-05")).toBeUndefined();
+    expect(getBookableDepartureContext("unknown-departure")).toBeUndefined();
+    expect(getDepartureContext("vatnajokull-2026-02-19")?.departure.readiness).toBe(
+      "Weather watch",
+    );
+  });
+
+  it("keeps party size within the fixture-derived remaining capacity", () => {
+    expect(getSafePartySize({ party: "3" }, 3)).toBe(3);
+    expect(getSafePartySize({ party: "4" }, 3)).toBe(1);
+    expect(getSafePartySize({ party: ["2", "3"] }, 3)).toBe(2);
+    expect(getSafePartySize({ party: "not-a-number" }, 3)).toBe(1);
   });
 });

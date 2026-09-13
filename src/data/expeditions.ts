@@ -14,6 +14,32 @@ export type ExpeditionReadiness = {
   capacityNote: string;
 };
 
+export type DepartureReadiness = "Ready" | "Weather watch" | "Full";
+
+export type Departure = {
+  id: string;
+  expeditionSlug: string;
+  dateRange: string;
+  capacity: number;
+  remainingSpaces: number;
+  readiness: DepartureReadiness;
+  readinessDetail: string;
+  price: {
+    accommodationAndGuiding: number;
+    routeLogistics: number;
+    currency: "EUR";
+  };
+};
+
+export type DepartureContext = {
+  departure: Departure;
+  expedition: Expedition;
+};
+
+export type BookingQuery = {
+  party?: string | readonly string[];
+};
+
 export type Expedition = {
   slug: string;
   title: string;
@@ -231,8 +257,129 @@ export const expeditions: readonly Expedition[] = [
   },
 ];
 
+export const departures: readonly Departure[] = [
+  {
+    id: "lofoten-2026-02-12",
+    expeditionSlug: "lofoten-night-crossing",
+    dateRange: "12 — 16 February 2026",
+    capacity: 8,
+    remainingSpaces: 3,
+    readiness: "Ready",
+    readinessDetail: "Cabin, guide, and ground-route plan are aligned for the current weather window.",
+    price: {
+      accommodationAndGuiding: 2140,
+      routeLogistics: 350,
+      currency: "EUR",
+    },
+  },
+  {
+    id: "lofoten-2026-03-05",
+    expeditionSlug: "lofoten-night-crossing",
+    dateRange: "5 — 9 March 2026",
+    capacity: 8,
+    remainingSpaces: 0,
+    readiness: "Full",
+    readinessDetail: "This small-group departure has no remaining spaces.",
+    price: {
+      accommodationAndGuiding: 2140,
+      routeLogistics: 350,
+      currency: "EUR",
+    },
+  },
+  {
+    id: "vatnajokull-2026-01-22",
+    expeditionSlug: "vatnajokull-after-light",
+    dateRange: "22 — 27 January 2026",
+    capacity: 10,
+    remainingSpaces: 4,
+    readiness: "Ready",
+    readinessDetail: "Lodge and local drivers are confirmed, with weather alternatives held for every coastal day.",
+    price: {
+      accommodationAndGuiding: 2380,
+      routeLogistics: 410,
+      currency: "EUR",
+    },
+  },
+  {
+    id: "vatnajokull-2026-02-19",
+    expeditionSlug: "vatnajokull-after-light",
+    dateRange: "19 — 24 February 2026",
+    capacity: 10,
+    remainingSpaces: 2,
+    readiness: "Weather watch",
+    readinessDetail: "A local weather decision is still pending, so this departure is not available for review yet.",
+    price: {
+      accommodationAndGuiding: 2380,
+      routeLogistics: 410,
+      currency: "EUR",
+    },
+  },
+  {
+    id: "finnmark-2026-03-14",
+    expeditionSlug: "arctic-circle-field-notes",
+    dateRange: "14 — 20 March 2026",
+    capacity: 6,
+    remainingSpaces: 2,
+    readiness: "Ready",
+    readinessDetail: "The remote lodge, guide rota, and alternative field routes are ready for final review.",
+    price: {
+      accommodationAndGuiding: 2840,
+      routeLogistics: 520,
+      currency: "EUR",
+    },
+  },
+  {
+    id: "finnmark-2026-04-04",
+    expeditionSlug: "arctic-circle-field-notes",
+    dateRange: "4 — 10 April 2026",
+    capacity: 6,
+    remainingSpaces: 0,
+    readiness: "Full",
+    readinessDetail: "This small-group departure has no remaining spaces.",
+    price: {
+      accommodationAndGuiding: 2840,
+      routeLogistics: 520,
+      currency: "EUR",
+    },
+  },
+];
+
 export function getExpeditionBySlug(slug: string): Expedition | undefined {
   return expeditions.find((expedition) => expedition.slug === slug);
+}
+
+export function getDeparturesForExpedition(slug: string): Departure[] {
+  return departures.filter((departure) => departure.expeditionSlug === slug);
+}
+
+export function getDepartureById(id: string): Departure | undefined {
+  return departures.find((departure) => departure.id === id);
+}
+
+export function isDepartureSelectable(departure: Departure) {
+  return departure.readiness === "Ready" && departure.remainingSpaces > 0;
+}
+
+export function getDepartureContext(id: string): DepartureContext | undefined {
+  const departure = getDepartureById(id);
+
+  if (!departure) {
+    return undefined;
+  }
+
+  const expedition = getExpeditionBySlug(departure.expeditionSlug);
+
+  return expedition ? { departure, expedition } : undefined;
+}
+
+export function getBookableDepartureContext(id: string): DepartureContext | undefined {
+  const context = getDepartureContext(id);
+
+  return context && isDepartureSelectable(context.departure) ? context : undefined;
+}
+
+export function getPricePerTraveller(departure: Departure) {
+  return departure.price.accommodationAndGuiding + departure.price.routeLogistics;
 }
 
 export const discoveryRegions = ["Iceland", "Norway"] as const;
@@ -241,6 +388,14 @@ export const discoveryDurations = [4, 5, 6] as const;
 
 function firstQueryValue(value: string | readonly string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
+}
+
+export function getSafePartySize(query: BookingQuery, maximum: number) {
+  const partySize = Number(firstQueryValue(query.party));
+
+  return Number.isInteger(partySize) && partySize >= 1 && partySize <= maximum
+    ? partySize
+    : 1;
 }
 
 export function parseDiscoveryFilters(query: DiscoveryQuery): DiscoveryFilters {
