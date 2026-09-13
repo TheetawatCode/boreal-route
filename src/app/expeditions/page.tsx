@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Northern lights expeditions",
   description:
     "Explore fictional small-group northern-lights expeditions across Iceland and Norway.",
+  alternates: { canonical: "/expeditions" },
 };
 
 type ExpeditionIndexPageProps = {

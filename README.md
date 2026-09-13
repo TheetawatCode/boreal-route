@@ -33,7 +33,7 @@ Aurora travel is a planning problem shaped by weather, limited capacity, route a
 
 Boreal Route has no real bookings, payments, traveller accounts, authentication, database, external APIs, analytics, remote deployment, or personal-data collection. The booking and operations views are explicitly fictional and read-only where appropriate.
 
-`metadataBase`, canonical URLs, `sitemap.ts`, and a final public demo URL are intentionally deferred until a real public hostname is chosen.
+The current public demo uses the Vercel default domain: [boreal-route.vercel.app](https://boreal-route.vercel.app). `metadataBase`, canonical URLs, and `sitemap.ts` use that hostname; they should be updated if a custom domain is adopted later.
 
 ## Route map
 

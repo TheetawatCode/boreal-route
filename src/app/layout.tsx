@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://boreal-route.vercel.app"),
   title: {
     default: "Boreal Route | Northern lights expedition planning",
     template: "%s | Boreal Route",
@@ -20,18 +21,31 @@ export const metadata: Metadata = {
   description:
     "A fictional northern-lights expedition platform for travel discovery, simulated booking, and departure coordination.",
   applicationName: "Boreal Route",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     title: "Boreal Route | Northern lights expedition planning",
     description:
       "A fictional northern-lights expedition platform for travel discovery, simulated booking, and departure coordination.",
+    url: "/",
+    images: [
+      {
+        url: "/images/boreal-route-hero.png",
+        width: 1672,
+        height: 941,
+        alt: "Moonlit Lofoten coastline beneath a restrained aurora.",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Boreal Route | Northern lights expedition planning",
     description:
       "A fictional northern-lights expedition platform for travel discovery, simulated booking, and departure coordination.",
+    images: ["/images/boreal-route-hero.png"],
   },
 };
 

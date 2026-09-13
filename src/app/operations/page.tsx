@@ -16,6 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "Demo operations",
   description: "A fictional Boreal Route operations-manager departure readiness workspace.",
+  alternates: { canonical: "/operations" },
 };
 
 type OperationsPageProps = {

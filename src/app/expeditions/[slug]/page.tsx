@@ -29,12 +29,14 @@ export async function generateMetadata({
     return {
       title: "Expedition not found",
       description: "The requested Boreal Route expedition could not be found.",
+      robots: { index: false, follow: false },
     };
   }
 
   return {
     title: expedition.title,
     description: expedition.summary,
+    alternates: { canonical: `/expeditions/${expedition.slug}` },
   };
 }
 

@@ -31,12 +31,14 @@ export async function generateMetadata({
     return {
       title: "Departure unavailable",
       description: "The requested Boreal Route departure is not available for review.",
+      robots: { index: false, follow: false },
     };
   }
 
   return {
     title: `Review ${context.expedition.title}`,
     description: `Fictional booking review for the ${context.departure.dateRange} departure of ${context.expedition.title}.`,
+    alternates: { canonical: `/book/${departureId}` },
   };
 }
 

@@ -24,12 +24,17 @@ export async function generateMetadata({ params }: OperationsDeparturePageProps)
   const context = getOperationsDepartureContext(id);
 
   if (!context) {
-    return { title: "Departure unavailable", description: "The requested demo operations departure could not be found." };
+    return {
+      title: "Departure unavailable",
+      description: "The requested demo operations departure could not be found.",
+      robots: { index: false, follow: false },
+    };
   }
 
   return {
     title: `${context.expedition.title} coordination`,
     description: `Fictional operations coordination for the ${context.departure.dateRange} departure of ${context.expedition.title}.`,
+    alternates: { canonical: `/operations/departures/${context.departure.id}` },
   };
 }
 
