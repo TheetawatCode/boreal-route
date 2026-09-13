@@ -16,6 +16,16 @@ export type ExpeditionReadiness = {
 
 export type DepartureReadiness = "Ready" | "Weather watch" | "Full";
 
+export type WeatherDecision = "Cleared" | "Monitoring" | "Closed";
+
+export type AllocationStatus = "Aligned" | "Needs attention" | "Not required";
+
+export type DepartureAllocation = {
+  guideSummary: string;
+  vehicleSummary: string;
+  status: AllocationStatus;
+};
+
 export type Departure = {
   id: string;
   expeditionSlug: string;
@@ -24,6 +34,8 @@ export type Departure = {
   remainingSpaces: number;
   readiness: DepartureReadiness;
   readinessDetail: string;
+  weatherDecision: WeatherDecision;
+  allocation: DepartureAllocation;
   price: {
     accommodationAndGuiding: number;
     routeLogistics: number;
@@ -266,6 +278,12 @@ export const departures: readonly Departure[] = [
     remainingSpaces: 3,
     readiness: "Ready",
     readinessDetail: "Cabin, guide, and ground-route plan are aligned for the current weather window.",
+    weatherDecision: "Cleared",
+    allocation: {
+      guideSummary: "Guide pair assigned · S. Nilsen + M. Berg",
+      vehicleSummary: "2 winter vans confirmed",
+      status: "Aligned",
+    },
     price: {
       accommodationAndGuiding: 2140,
       routeLogistics: 350,
@@ -280,6 +298,12 @@ export const departures: readonly Departure[] = [
     remainingSpaces: 0,
     readiness: "Full",
     readinessDetail: "This small-group departure has no remaining spaces.",
+    weatherDecision: "Closed",
+    allocation: {
+      guideSummary: "Guide roster closed",
+      vehicleSummary: "Vehicle allocation closed",
+      status: "Not required",
+    },
     price: {
       accommodationAndGuiding: 2140,
       routeLogistics: 350,
@@ -294,6 +318,12 @@ export const departures: readonly Departure[] = [
     remainingSpaces: 4,
     readiness: "Ready",
     readinessDetail: "Lodge and local drivers are confirmed, with weather alternatives held for every coastal day.",
+    weatherDecision: "Cleared",
+    allocation: {
+      guideSummary: "Lead guide assigned · E. Jónsdóttir",
+      vehicleSummary: "4×4 and driver confirmed",
+      status: "Aligned",
+    },
     price: {
       accommodationAndGuiding: 2380,
       routeLogistics: 410,
@@ -308,6 +338,12 @@ export const departures: readonly Departure[] = [
     remainingSpaces: 2,
     readiness: "Weather watch",
     readinessDetail: "A local weather decision is still pending, so this departure is not available for review yet.",
+    weatherDecision: "Monitoring",
+    allocation: {
+      guideSummary: "Guide held pending weather decision",
+      vehicleSummary: "4×4 option on weather hold",
+      status: "Needs attention",
+    },
     price: {
       accommodationAndGuiding: 2380,
       routeLogistics: 410,
@@ -322,6 +358,12 @@ export const departures: readonly Departure[] = [
     remainingSpaces: 2,
     readiness: "Ready",
     readinessDetail: "The remote lodge, guide rota, and alternative field routes are ready for final review.",
+    weatherDecision: "Cleared",
+    allocation: {
+      guideSummary: "Field guide pair assigned · A. Hansen + R. Sámi",
+      vehicleSummary: "Expedition minibus confirmed",
+      status: "Aligned",
+    },
     price: {
       accommodationAndGuiding: 2840,
       routeLogistics: 520,
@@ -336,6 +378,12 @@ export const departures: readonly Departure[] = [
     remainingSpaces: 0,
     readiness: "Full",
     readinessDetail: "This small-group departure has no remaining spaces.",
+    weatherDecision: "Closed",
+    allocation: {
+      guideSummary: "Guide roster closed",
+      vehicleSummary: "Vehicle allocation closed",
+      status: "Not required",
+    },
     price: {
       accommodationAndGuiding: 2840,
       routeLogistics: 520,
