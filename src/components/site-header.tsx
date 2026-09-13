@@ -1,11 +1,17 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navigationItems = [
   { href: "/expeditions", label: "Expeditions" },
+  { href: "/trips", label: "My trip" },
   { href: "/#approach", label: "Our approach" },
 ] as const;
 
 export function SiteHeader() {
+  const pathname = usePathname();
+
   return (
     <header className="border-b border-white/15 bg-[#07111f] text-[#f6f7f4]">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-4 px-5 py-5 sm:px-8 lg:px-12">
@@ -21,6 +27,7 @@ export function SiteHeader() {
               <li key={item.href}>
                 <Link
                   href={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
                   className="outline-offset-4 transition-colors hover:text-[#f6f7f4] focus-visible:outline-2 focus-visible:outline-[#78d7c0]"
                 >
                   {item.label}

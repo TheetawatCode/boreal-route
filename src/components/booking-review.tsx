@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { BookingConfirmation } from "@/components/booking-confirmation";
 import {
   getPricePerTraveller,
   type DepartureContext,
@@ -139,6 +140,8 @@ export function BookingReview({ context, partySize }: BookingReviewProps) {
                 </div>
               </dl>
             </section>
+
+            <BookingConfirmation departureId={departure.id} partySize={partySize} />
           </section>
 
           <aside aria-labelledby="price-heading" className="lg:col-span-5 lg:pl-8">
