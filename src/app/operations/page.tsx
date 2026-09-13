@@ -14,7 +14,7 @@ import {
 } from "@/data/operations";
 
 export const metadata: Metadata = {
-  title: "Demo Operations | Boreal Route",
+  title: "Demo operations",
   description: "A fictional Boreal Route operations-manager departure readiness workspace.",
 };
 
@@ -81,7 +81,7 @@ export default async function OperationsPage({ searchParams }: OperationsPagePro
           <div className="mt-14 border-b border-[#bdcbd2] pb-7">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#416f88]">Departure board</p>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">{results.length} departure{results.length === 1 ? "" : "s"} in view</h2>
-            <p role="status" className="mt-4 max-w-2xl text-sm leading-6 text-[#425467]">{hasActiveFilters ? `Showing ${results.length} departure${results.length === 1 ? "" : "s"} for ${activeFilters.join(" · ")}.` : "Showing all fictional departures and their current fixture-derived readiness."}</p>
+            <p role="status" aria-atomic="true" className="mt-4 max-w-2xl text-sm leading-6 text-[#425467]">{hasActiveFilters ? `Showing ${results.length} departure${results.length === 1 ? "" : "s"} for ${activeFilters.join(" · ")}.` : "Showing all fictional departures and their current fixture-derived readiness."}</p>
           </div>
 
           {results.length ? <OperationsDepartureList departures={results} /> : (

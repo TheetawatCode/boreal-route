@@ -13,9 +13,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Boreal Route | Northern lights expedition planning",
+  title: {
+    default: "Boreal Route | Northern lights expedition planning",
+    template: "%s | Boreal Route",
+  },
   description:
-    "A fictional northern-lights expedition booking and operations workspace.",
+    "A fictional northern-lights expedition platform for travel discovery, simulated booking, and departure coordination.",
+  applicationName: "Boreal Route",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    title: "Boreal Route | Northern lights expedition planning",
+    description:
+      "A fictional northern-lights expedition platform for travel discovery, simulated booking, and departure coordination.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Boreal Route | Northern lights expedition planning",
+    description:
+      "A fictional northern-lights expedition platform for travel discovery, simulated booking, and departure coordination.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

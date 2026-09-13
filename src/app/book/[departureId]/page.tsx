@@ -29,13 +29,13 @@ export async function generateMetadata({
 
   if (!context) {
     return {
-      title: "Departure unavailable | Boreal Route",
+      title: "Departure unavailable",
       description: "The requested Boreal Route departure is not available for review.",
     };
   }
 
   return {
-    title: `Review ${context.expedition.title} | Boreal Route`,
+    title: `Review ${context.expedition.title}`,
     description: `Fictional booking review for the ${context.departure.dateRange} departure of ${context.expedition.title}.`,
   };
 }

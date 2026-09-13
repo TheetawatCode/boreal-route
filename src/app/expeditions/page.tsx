@@ -13,7 +13,7 @@ import {
 } from "@/data/expeditions";
 
 export const metadata: Metadata = {
-  title: "Northern Lights Expeditions | Boreal Route",
+  title: "Northern lights expeditions",
   description:
     "Explore fictional small-group northern-lights expeditions across Iceland and Norway.",
 };
@@ -135,7 +135,7 @@ export default async function ExpeditionIndexPage({
                   {pluraliseExpeditions(results.length)} found
                 </h2>
               </div>
-              <p role="status" className="max-w-md text-sm leading-6 text-[#425467]">
+              <p role="status" aria-atomic="true" className="max-w-md text-sm leading-6 text-[#425467]">
                 {hasActiveFilters
                   ? `Showing ${pluraliseExpeditions(results.length)} for ${activeFilters.join(" · ")}.`
                   : "Showing every current northern-lights expedition."}

@@ -18,6 +18,11 @@ body {
   font-family: var(--font-geist-sans), sans-serif;
 }
 
+:focus-visible {
+  outline: 2px solid #78d7c0;
+  outline-offset: 3px;
+}
+
 .aurora-haze {
   background:
     radial-gradient(circle at 22% 34%, rgb(120 215 192 / 0.45), transparent 18%),
@@ -31,6 +36,9 @@ body {
   *,
   *::before,
   *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

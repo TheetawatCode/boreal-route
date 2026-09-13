@@ -27,13 +27,13 @@ export async function generateMetadata({
 
   if (!expedition) {
     return {
-      title: "Expedition not found | Boreal Route",
+      title: "Expedition not found",
       description: "The requested Boreal Route expedition could not be found.",
     };
   }
 
   return {
-    title: `${expedition.title} | Boreal Route`,
+    title: expedition.title,
     description: expedition.summary,
   };
 }

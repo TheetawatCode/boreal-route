@@ -1,95 +1,61 @@
 # Boreal Route
 
-**Boreal Route** is a fictional northern-lights expedition booking and operations platform. It is designed as a portfolio-quality web application for showcasing the decisions behind premium travel discovery, trip planning, availability, and day-of-departure coordination.
+Boreal Route is a fictional northern-lights expedition platform built as a portfolio project. It demonstrates an editorial travel-discovery experience alongside deliberately small, credible full-stack-adjacent workflows: fixture-derived availability, a browser-local booking simulation, traveller itinerary recovery, and read-only operations coordination.
 
-The product treats aurora travel as a real operational problem—not a generic booking template. A traveller needs confidence in an unfamiliar journey; a guide team needs a clear view of departures, people, vehicles, and weather-led decisions.
+## Product problem
 
-## Product focus
+Aurora travel is a planning problem shaped by weather, limited capacity, route alternatives, and clear expectations—not a generic “buy now” travel listing. Boreal Route gives travellers confidence before committing to an unfamiliar winter journey, while making the operational decisions behind each departure legible.
 
-- Editorial discovery for small-group northern-lights expeditions
-- Clear expedition, itinerary, departure, capacity, and preparation details
-- A simulated booking journey that never processes a real payment
-- A traveller view of upcoming trip details and booking status
-- An operations workspace for departure calendars, rosters, guide and vehicle allocation, and weather decisions
-- Role-aware demo views for traveller, guide, and operations manager
+## Key workflows
 
-## Scope and non-goals
+- Discover three distinct fictional expeditions, filter by region and duration, then recover gracefully from an empty result.
+- Read an expedition itinerary, compare fixture-derived departure readiness and capacity, and review only selectable departures.
+- Run a simulated booking review with a native capacity-limited party-size control and transparent fixture-derived price estimate.
+- Confirm a simulation that stores only a departure ID, party size, deterministic demo reference, and timestamp in browser localStorage; view or clear it from `/trips`.
+- Review departure readiness in a read-only operations board, filter by readiness or weather decision, and drill into a coordination detail view.
 
-This project deliberately optimizes for a credible, well-tested product slice.
+## Technical decisions
 
-**In scope**
+- **Next.js App Router + TypeScript:** route metadata, static params for fixture-backed detail pages, `next/image`, and server-rendered URL-filtered views.
+- **Typed fixtures as the domain layer:** expeditions, departures, price components, capacity, weather decisions, allocation summaries, and coordination timelines derive all interface state without a database.
+- **Minimal client state:** the booking simulation stores no names, contact details, passport data, payment details, or any other personal data.
+- **Local imagery:** four original generated PNG assets live in `public/images/`; their brief, dimensions, byte sizes, alt-text intent, and constraints are documented in [docs/image-brief.md](docs/image-brief.md).
+- **Delivery checks:** GitHub Actions validates Node 24 and pinned pnpm 12.4.1 using frozen-lockfile install, tests, lint, typecheck, and production build.
 
-- Responsive public discovery and expedition-detail experiences
-- Typed fictional data and deterministic availability rules
-- Simulated booking, confirmation, and itinerary states
-- An accessible, responsive operations workspace
-- Focused unit and component tests, production build checks, and browser reflow review
+## Accessibility and quality evidence
 
-**Not in scope**
+- Semantic landmarks, logical heading order, native selects and buttons, labelled forms, visible keyboard focus, text-based status signals, polite confirmation feedback, and recovery states.
+- Global reduced-motion safeguards disable nonessential animation and transition timing.
+- Focused Vitest + Testing Library coverage for fixture logic, capacity rules, simulated-state derivation, route recovery, filters, operations attention guidance, and image alt semantics.
+- Each milestone is validated with tests, lint, TypeScript, production build, `git diff --check`, and desktop/320px Localhost review.
 
-- Real payments, traveller accounts, travel insurance, or production reservations
-- Live weather, maps, email, CRM, or third-party booking integrations
-- Real personal data, authentication providers, or database access in the initial milestones
-- A content-management system, multi-currency, or a full back-office suite
+## Simulation boundaries
 
-## Planned stack
+Boreal Route has no real bookings, payments, traveller accounts, authentication, database, external APIs, analytics, remote deployment, or personal-data collection. The booking and operations views are explicitly fictional and read-only where appropriate.
 
-- Next.js App Router and React
-- TypeScript and Tailwind CSS
-- pnpm
-- Vitest and Testing Library as interactive features arrive
-- Typed fixtures first; PostgreSQL and Prisma only when a later milestone genuinely needs persistence
+`metadataBase`, canonical URLs, `sitemap.ts`, and a final public demo URL are intentionally deferred until a real public hostname is chosen.
 
 ## Route map
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Editorial introduction and expedition discovery |
-| `/expeditions` | Searchable expedition index |
-| `/expeditions/[slug]` | Expedition story, itinerary, and departure selection |
-| `/book/[departureId]` | Simulated booking flow |
-| `/trips` | Traveller booking and itinerary view |
-| `/operations` | Operations overview for departure readiness |
-| `/operations/departures/[id]` | Departure roster and allocation details |
-
-## Data model outline
-
-The first implementation will use typed fixtures for:
-
-- **Destination** — region, season, terrain, and visual story
-- **Expedition** — title, duration, difficulty, itinerary, inclusions, and gallery direction
-- **Departure** — expedition date range, capacity, booking status, and weather readiness
-- **Guide** and **Vehicle** — availability and allocation
-- **Traveller** and **Booking** — fictional participant and confirmation data
-- **Weather decision** — a clear operational status, rationale, and timestamp
-
-## Accessibility commitments
-
-- Semantic landmarks, a logical heading hierarchy, and visible keyboard focus
-- Native controls where they provide the best behaviour; labelled custom interactions where needed
-- Status updates and booking feedback announced without unexpected focus movement
-- Reduced-motion support and no information conveyed by colour alone
-- Reflow checks down to 320 px with no horizontal overflow
-
-## Testing strategy
-
-Each milestone will add tests nearest to its risk: deterministic availability and booking rules, interactive form states, operations status rendering, and recovery paths. Every milestone is also checked with linting, TypeScript, a production build, and a local browser review at desktop and narrow mobile widths.
-
-## Milestone plan
-
-1. **Foundation** — product brief, design direction, project hygiene, and a branded shell.
-2. **Discovery** — typed expedition fixtures, editorial home, discovery index, and expedition details.
-3. **Booking** — selection, capacity rules, simulated confirmation, and traveller itinerary states.
-4. **Operations** — departure readiness, rosters, allocations, and weather-decision workflows.
-5. **Hardening** — accessibility/performance audit, metadata, CI, deployment preparation, and case study.
+| `/` | Editorial product introduction and featured expeditions |
+| `/expeditions` | URL-filtered expedition discovery index |
+| `/expeditions/[slug]` | Expedition story, image, itinerary, and departure selection |
+| `/book/[departureId]` | Capacity-safe simulated booking review |
+| `/trips` | Browser-local simulated traveller itinerary and recovery |
+| `/operations` | Read-only fictional departure readiness board |
+| `/operations/departures/[id]` | Read-only departure coordination detail |
 
 ## Local development
 
+Use the Node version in `.nvmrc` and the pinned pnpm version in `package.json`.
+
 ```bash
+pnpm install --frozen-lockfile
 pnpm dev
+pnpm test
 pnpm lint
 pnpm typecheck
 pnpm build
 ```
-
-Milestone 0 intentionally has no Git remote, deployment configuration, booking implementation, database, or external service integration.
