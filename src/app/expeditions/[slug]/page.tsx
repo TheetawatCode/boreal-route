@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -119,6 +120,19 @@ export default async function ExpeditionDetailPage({
             </ul>
           </div>
         </section>
+
+        <figure className="mx-auto max-w-6xl px-5 pt-10 sm:px-8 sm:pt-14 lg:px-12">
+          <div className="relative aspect-[3/2] overflow-hidden bg-[#10243a]">
+            <Image
+              src={expedition.image.src}
+              alt={expedition.image.alt}
+              width={expedition.image.width}
+              height={expedition.image.height}
+              sizes="(min-width: 1200px) 1152px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
+              className="size-full object-cover"
+            />
+          </div>
+        </figure>
 
         <div className="mx-auto grid max-w-6xl gap-14 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-12 lg:gap-8 lg:px-12">
           <section aria-labelledby="itinerary-heading" className="lg:col-span-8">

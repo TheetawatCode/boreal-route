@@ -24,6 +24,9 @@ describe("expedition fixtures", () => {
       expect(expedition.title).not.toHaveLength(0);
       expect(expedition.durationNights).toBeGreaterThan(0);
       expect(expedition.highlights).toHaveLength(3);
+      expect(expedition.image.src).toMatch(/^\/images\//);
+      expect(expedition.image.alt.length).toBeGreaterThan(20);
+      expect(expedition.image.width / expedition.image.height).toBeCloseTo(1.5);
     }
   });
 

@@ -1,14 +1,26 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { ExpeditionCard } from "@/components/expedition-card";
 import { SiteHeader } from "@/components/site-header";
 import { expeditions } from "@/data/expeditions";
-import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#f6f7f4] text-[#07111f]">
       <SiteHeader />
       <main>
-        <section className="overflow-hidden bg-[#07111f] text-[#f6f7f4]">
+        <section className="relative isolate overflow-hidden bg-[#07111f] text-[#f6f7f4]">
+          <Image
+            src="/images/boreal-route-hero.png"
+            alt=""
+            width={1672}
+            height={941}
+            sizes="100vw"
+            priority
+            className="absolute inset-0 -z-10 size-full object-cover object-center opacity-65"
+          />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-r from-[#07111f] via-[#07111f]/80 to-[#07111f]/35" />
           <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-12 lg:items-end lg:gap-8 lg:px-12 lg:py-28">
             <div className="relative lg:col-span-8">
               <div className="aurora-haze pointer-events-none absolute -left-36 -top-44 size-[32rem] opacity-80" />

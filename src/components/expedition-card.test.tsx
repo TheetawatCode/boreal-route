@@ -18,5 +18,10 @@ describe("ExpeditionCard", () => {
     expect(
       screen.getByRole("link", { name: "View Lofoten Night Crossing" }),
     ).toHaveAttribute("href", "/expeditions/lofoten-night-crossing");
+    expect(
+      screen.getByAltText(
+        "A snow-dusted Lofoten fishing harbour beneath a steep ridge and a muted aurora.",
+      ),
+    ).toHaveAttribute("src", expect.stringContaining("lofoten-night-crossing.png"));
   });
 });

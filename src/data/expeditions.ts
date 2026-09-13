@@ -14,6 +14,13 @@ export type ExpeditionReadiness = {
   capacityNote: string;
 };
 
+export type ExpeditionImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type DepartureReadiness = "Ready" | "Weather watch" | "Full";
 
 export type WeatherDecision = "Cleared" | "Monitoring" | "Closed";
@@ -82,6 +89,7 @@ export type Expedition = {
   inclusions: readonly string[];
   preparation: readonly string[];
   readiness: ExpeditionReadiness;
+  image: ExpeditionImage;
 };
 
 export type DiscoveryQuery = {
@@ -150,6 +158,12 @@ export const expeditions: readonly Expedition[] = [
         "The coast-to-cabin route is designed with sheltered alternatives when wind or road conditions shift.",
       capacityNote: "Small group plan · up to 8 travellers",
     },
+    image: {
+      src: "/images/lofoten-night-crossing.png",
+      alt: "A snow-dusted Lofoten fishing harbour beneath a steep ridge and a muted aurora.",
+      width: 1536,
+      height: 1024,
+    },
   },
   {
     slug: "vatnajokull-after-light",
@@ -211,6 +225,12 @@ export const expeditions: readonly Expedition[] = [
       description:
         "Each daytime stop has a weather-led alternative, protecting space for the best available evening conditions.",
       capacityNote: "Small group plan · up to 10 travellers",
+    },
+    image: {
+      src: "/images/vatnajokull-after-light.png",
+      alt: "Moonlit ice at a Vatnajökull glacier lagoon above a black-sand shore under a soft aurora.",
+      width: 1536,
+      height: 1024,
     },
   },
   {
@@ -279,6 +299,12 @@ export const expeditions: readonly Expedition[] = [
       description:
         "The guide team holds multiple forest and fjord options, with the final choice made from current local conditions.",
       capacityNote: "Small group plan · up to 6 travellers",
+    },
+    image: {
+      src: "/images/arctic-circle-field-notes.png",
+      alt: "A snowy Finnmark birch forest opening toward a fjord, with a distant lodge light under a restrained aurora.",
+      width: 1536,
+      height: 1024,
     },
   },
 ];

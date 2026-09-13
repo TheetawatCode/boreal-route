@@ -1,12 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import type { Expedition } from "@/data/expeditions";
-
-const visualToneClasses: Record<Expedition["visualTone"], string> = {
-  luminous: "from-[#10243a] via-[#18414e] to-[#78d7c0]/70",
-  glacier: "from-[#253f5c] via-[#8dbae7]/70 to-[#f6f7f4]",
-  ember: "from-[#171a29] via-[#403348] to-[#e7b85d]/75",
-};
 
 type ExpeditionCardProps = {
   expedition: Expedition;
@@ -25,11 +20,16 @@ export function ExpeditionCard({ expedition }: ExpeditionCardProps) {
         aria-labelledby={titleId}
         className="grid overflow-hidden rounded-sm border border-[#10243a] bg-white shadow-[0_20px_60px_rgb(7_17_31_/_0.08)]"
       >
-        <div
-          aria-hidden="true"
-          className={`relative min-h-64 overflow-hidden bg-linear-to-br ${visualToneClasses[expedition.visualTone]}`}
-        >
-          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-[radial-gradient(ellipse_at_50%_100%,rgb(7_17_31_/_0.88),transparent_70%)]" />
+        <div className="relative aspect-[3/2] overflow-hidden bg-[#10243a]">
+          <Image
+            src={expedition.image.src}
+            alt={expedition.image.alt}
+            width={expedition.image.width}
+            height={expedition.image.height}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+          <div aria-hidden="true" className="absolute inset-0 bg-linear-to-t from-[#07111f]/80 via-transparent to-[#07111f]/10" />
           <div className="absolute inset-x-7 bottom-8 flex items-end justify-between border-b border-white/45 pb-3 text-xs font-medium uppercase tracking-[0.16em] text-white/90">
             <span>{expedition.region}</span>
             <span>{expedition.country}</span>
