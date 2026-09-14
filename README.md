@@ -4,6 +4,16 @@ Live demo: https://boreal-route.vercel.app
 
 [![Validate](https://github.com/TheetawatCode/boreal-route/actions/workflows/ci.yml/badge.svg)](https://github.com/TheetawatCode/boreal-route/actions/workflows/ci.yml)
 
+## Screenshots
+
+**Public discovery** — quiet, editorial filters and the current expedition collection.
+
+![Boreal Route expedition discovery page showing the route heading, region and duration filters, and three expedition cards.](docs/screenshots/boreal-route-discovery.png)
+
+**Operations coordination** — a weather-watch departure with attention guidance, capacity, and readiness timeline.
+
+![Boreal Route operations coordination page for Vatnajökull After Light showing weather-watch status, attention guidance, capacity summary, and readiness timeline.](docs/screenshots/boreal-route-operations.png)
+
 Boreal Route is a fictional northern-lights expedition platform built as a portfolio project. It demonstrates an editorial travel-discovery experience alongside deliberately small, credible full-stack-adjacent workflows: fixture-derived availability, a browser-local booking simulation, traveller itinerary recovery, and read-only operations coordination.
 
 ## Product problem
