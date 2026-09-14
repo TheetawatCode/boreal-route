@@ -13,6 +13,16 @@ All assets are original, licence-safe editorial winter photographs for this fict
 | `vatnajokull-after-light` | Vatnajökull card and detail page | Wide landscape, target 3:2. Moonlit glacier lagoon, low ice forms, black-sand shore, soft cloudy aurora. Describe the lagoon, ice, shore, and sky. |
 | `arctic-circle-field-notes` | Finnmark card and detail page | Wide landscape, target 3:2. Remote winter forest opening toward a quiet fjord, warm distant lodge glow and restrained aurora. Describe forest, fjord, lodge light, and sky. |
 
+## Supporting detail-image plan
+
+These three images are deliberate second story moments for their matching expedition detail pages only. They must remain distinct from the primary landscapes above, with no additional asset generation in this milestone.
+
+| Asset | Purpose and intended placement | Composition and target ratio | Alt-text intent | Planned format and dimensions | Byte size |
+| --- | --- | --- | --- | --- | --- |
+| `lofoten-cabin-preparation` | Lofoten detail page, following the primary route image; a warm, grounded counterpoint to the harbour landscape. | Wide 3:2 interior/exterior threshold: an unbranded coastal cabin preparation table with folded insulated layers, map, thermos, and a snow-lit window. No people required. | Describe the quiet cabin preparation scene and identifiable expedition objects, without implying a brand. | PNG · 1536 × 1024 | Record after generation |
+| `vatnajokull-weather-window` | Vatnajökull detail page, following the primary lagoon image; supports the weather-led route narrative. | Wide 3:2 daylight-blue scene: a guide-sized anonymous figure seen from behind beside a safe marked glacier-edge viewing route, looking toward layered ice and a low cloud break. | Describe the safe route, ice surface, cloud break, and carefully scaled human presence. | PNG · 1536 × 1024 | Record after generation |
+| `finnmark-night-camp` | Finnmark detail page, following the primary forest-and-fjord image; supports field preparation and the calm camp rhythm. | Wide 3:2 twilight night-camp still life: unbranded tripod, lantern, snowshoes, and a low sheltered tent outside a dark treeline, with restrained stars or aurora. | Describe the field equipment, sheltered camp, treeline, and night sky without suggesting unsafe conditions. | PNG · 1536 × 1024 | Record after generation |
+
 ## Integration constraints
 
 - Use `next/image` with explicit intrinsic dimensions, `sizes`, and `object-cover` so all image regions hold stable aspect ratios without layout shift.
@@ -28,3 +38,6 @@ All assets are original, licence-safe editorial winter photographs for this fict
 | Lofoten | `public/images/lofoten-night-crossing.png` | PNG | 1536 × 1024 | 2,315,697 bytes |
 | Vatnajökull | `public/images/vatnajokull-after-light.png` | PNG | 1536 × 1024 | 2,375,348 bytes |
 | Finnmark | `public/images/arctic-circle-field-notes.png` | PNG | 1536 × 1024 | 2,787,312 bytes |
+| Lofoten supporting detail | `public/images/lofoten-cabin-preparation.png` | PNG | 1536 × 1024 | 2,072,660 bytes |
+| Vatnajökull supporting detail | `public/images/vatnajokull-weather-window.png` | PNG | 1536 × 1024 | 2,320,349 bytes |
+| Finnmark supporting detail | `public/images/finnmark-night-camp.png` | PNG | 1536 × 1024 | 2,286,607 bytes |

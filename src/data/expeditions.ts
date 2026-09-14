@@ -90,6 +90,7 @@ export type Expedition = {
   preparation: readonly string[];
   readiness: ExpeditionReadiness;
   image: ExpeditionImage;
+  detailImage: ExpeditionImage;
 };
 
 export type DiscoveryQuery = {
@@ -164,6 +165,12 @@ export const expeditions: readonly Expedition[] = [
       width: 1536,
       height: 1024,
     },
+    detailImage: {
+      src: "/images/lofoten-cabin-preparation.png",
+      alt: "Folded insulated layers, a route map, thermos, and headlamp on a timber cabin table beside a snow-lit Lofoten window.",
+      width: 1536,
+      height: 1024,
+    },
   },
   {
     slug: "vatnajokull-after-light",
@@ -229,6 +236,12 @@ export const expeditions: readonly Expedition[] = [
     image: {
       src: "/images/vatnajokull-after-light.png",
       alt: "Moonlit ice at a Vatnajökull glacier lagoon above a black-sand shore under a soft aurora.",
+      width: 1536,
+      height: 1024,
+    },
+    detailImage: {
+      src: "/images/vatnajokull-weather-window.png",
+      alt: "A guide stands beside a marked snow route, looking across Vatnajökull ice toward a break in low winter cloud.",
       width: 1536,
       height: 1024,
     },
@@ -303,6 +316,12 @@ export const expeditions: readonly Expedition[] = [
     image: {
       src: "/images/arctic-circle-field-notes.png",
       alt: "A snowy Finnmark birch forest opening toward a fjord, with a distant lodge light under a restrained aurora.",
+      width: 1536,
+      height: 1024,
+    },
+    detailImage: {
+      src: "/images/finnmark-night-camp.png",
+      alt: "A sheltered Finnmark night camp with a tripod, snowshoes, field pack, lantern, and low tent beneath a faint aurora.",
       width: 1536,
       height: 1024,
     },

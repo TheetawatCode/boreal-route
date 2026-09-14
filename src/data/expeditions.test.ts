@@ -27,6 +27,10 @@ describe("expedition fixtures", () => {
       expect(expedition.image.src).toMatch(/^\/images\//);
       expect(expedition.image.alt.length).toBeGreaterThan(20);
       expect(expedition.image.width / expedition.image.height).toBeCloseTo(1.5);
+      expect(expedition.detailImage.src).toMatch(/^\/images\//);
+      expect(expedition.detailImage.src).not.toBe(expedition.image.src);
+      expect(expedition.detailImage.alt.length).toBeGreaterThan(20);
+      expect(expedition.detailImage.width / expedition.detailImage.height).toBeCloseTo(1.5);
     }
   });
 

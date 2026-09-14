@@ -136,6 +136,22 @@ export default async function ExpeditionDetailPage({
           </div>
         </figure>
 
+        <figure className="mx-auto max-w-6xl px-5 pt-8 sm:px-8 sm:pt-12 lg:px-12">
+          <div className="relative aspect-[3/2] overflow-hidden bg-[#10243a]">
+            <Image
+              src={expedition.detailImage.src}
+              alt={expedition.detailImage.alt}
+              width={expedition.detailImage.width}
+              height={expedition.detailImage.height}
+              sizes="(min-width: 1200px) 1152px, (min-width: 640px) calc(100vw - 64px), calc(100vw - 40px)"
+              className="size-full object-cover"
+            />
+          </div>
+          <figcaption className="mt-4 text-sm leading-6 text-[#425467]">
+            A closer route moment, shaped around the conditions that guide the day.
+          </figcaption>
+        </figure>
+
         <div className="mx-auto grid max-w-6xl gap-14 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-12 lg:gap-8 lg:px-12">
           <section aria-labelledby="itinerary-heading" className="lg:col-span-8">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#416f88]">
