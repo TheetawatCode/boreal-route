@@ -1,5 +1,9 @@
 # Boreal Route
 
+Live demo: https://boreal-route.vercel.app
+
+[![Validate](https://github.com/TheetawatCode/boreal-route/actions/workflows/ci.yml/badge.svg)](https://github.com/TheetawatCode/boreal-route/actions/workflows/ci.yml)
+
 Boreal Route is a fictional northern-lights expedition platform built as a portfolio project. It demonstrates an editorial travel-discovery experience alongside deliberately small, credible full-stack-adjacent workflows: fixture-derived availability, a browser-local booking simulation, traveller itinerary recovery, and read-only operations coordination.
 
 ## Product problem
